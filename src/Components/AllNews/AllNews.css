@@ -1,0 +1,12 @@
+.allNews{
+    flex:9;
+    display:flex;
+    flex-wrap: wrap;
+    margin: 5%;
+}
+.news{
+    color: rgb(63, 79, 88);
+    font-family: 'Lora', serif;
+    margin-left: 5%;
+ font-weight: bold;
+}
