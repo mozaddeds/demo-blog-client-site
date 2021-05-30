@@ -59,3 +59,13 @@
     color: white;
     border-radius: 10px;
   }
+
+  .googleSignInBtn {
+    position: relative;
+    margin-top: 20px;
+    border-radius: 10px;
+    width: 14%;
+    height: 47px;
+    color: white !important;
+    background-color: rgb(46, 31, 250);
+  }

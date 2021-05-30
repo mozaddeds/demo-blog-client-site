@@ -9,7 +9,7 @@ const SinglePost = () => {
                     Lorem ipsum dolor sit amet.
                     <div className="singlePostEdit">
                         <i className="singlePostIcon far fa-edit"></i>
-                        <i class="singlePostIcon far fa-trash-alt"></i>
+                        <i className="singlePostIcon far fa-trash-alt"></i>
                     </div>
                 </h1>
                 <div className="singlePostInfo">

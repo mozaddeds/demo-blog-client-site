@@ -6,7 +6,6 @@ const AllNews = () => {
         <div>
             <h1 className="news">All News</h1>
             <div className="allNews">
-
                 <News></News>
                 <News></News>
                 <News></News>
