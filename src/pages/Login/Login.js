@@ -4,7 +4,6 @@ import './Login.css';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
-import hrLine from '../../hrLine.png';
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
