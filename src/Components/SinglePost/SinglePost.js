@@ -1,12 +1,26 @@
 import React from 'react';
-import './SinglePost.css'
-const SinglePost = () => {
+import './SinglePost.css';
+import fakeData from '../News/fakeData.json';
+
+
+const SinglePost = (props) => {
+
+    const newsId = props.newsId;
+    let news;
+
+    if (newsId) {
+        news = fakeData.filter(newsItem => newsItem.id === newsId)
+        console.log(news[0]);
+    }
+
+
+
     return (
         <div className="singlePost">
             <div className="singlePostWrapper">
-                <img className="singlePostImg" src="https://images.pexels.com/photos/1167355/pexels-photo-1167355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" />
+                <img className="singlePostImg" src={news[0].img} alt="" />
                 <h1 className="singlePostTitle">
-                    Lorem ipsum dolor sit amet.
+                    {news[0].title}
                     <div className="singlePostEdit">
                         <i className="singlePostIcon far fa-edit"></i>
                         <i className="singlePostIcon far fa-trash-alt"></i>
@@ -14,11 +28,11 @@ const SinglePost = () => {
                 </h1>
                 <div className="singlePostInfo">
                     <span className="singlePostAuthor">
-                        Author: <b>Shakib</b>
+                        Author: <b>{news[0].name}</b>
                     </span>
-                    <span className="singlePostDate">1 hour ago </span>
+                    <span className="singlePostDate">{news[0].date} </span>
                 </div>
-                <p className="singlePostDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quisquam aut sapiente ex esse mollitia eum assumenda ab sint illo rem nobis, odio architecto modi totam? Provident alias praesentium omnis magnam minima impedit placeat, porro voluptas rem laborum recusandae quas magni tempora reprehenderit doloribus inventore! Quidem a sed excepturi porro.</p>
+                <p className="singlePostDesc">{news[0].description}</p>
             </div>
         </div>
     );

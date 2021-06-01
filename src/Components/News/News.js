@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './News.css'
-const News = () => {
+import fakeData from './fakeData.json';
+import { useHistory } from 'react-router';
+
+const News = (props) => {
+
+    let history = useHistory();
+
+    const { id, title, email, name, description, date, img } = props.news;
+    const openNews = (newsId) => {
+        const url = `/news/hvfhe${newsId}`;
+        history.push(url);
+    }
+
     return (
 
-        <div className="post">
-            <img className="postImg" src="https://avatars.githubusercontent.com/u/76786635?s=96&v=4" alt=""
+        <div onClick = {() => openNews(id)} className="post">
+            <img className="postImg" src={img} alt=""
             />
 
             <div className="postInfo">
@@ -12,16 +24,12 @@ const News = () => {
                     <span className="postCat">Music</span>
                     <span className="postCat">Life</span>
                 </div>
-                <span className="postTitle">Lorem ipsum dolor sit amet con?
+                <span className="postTitle">{title}
                 </span>
                 <hr />
-                <span className="postDate">1 hour ago</span>
+                <span className="postDate">{date}</span>
             </div>
-            <p className="postDesc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates accusantium aliquam, quod deleniti sunt quae. Molestiae, nesciunt reprehenderit? Nemo, ducimus!
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates accusantium aliquam, quod deleniti sunt quae. Molestiae, nesciunt reprehenderit? Nemo, ducimus!
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates accusantium aliquam, quod deleniti sunt quae. Molestiae, nesciunt reprehenderit? Nemo, ducimus!
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates accusantium aliquam, quod deleniti sunt quae. Molestiae, nesciunt reprehenderit? Nemo, ducimus!
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates accusantium aliquam, quod deleniti sunt quae. Molestiae, nesciunt reprehenderit? Nemo, ducimus!</p>
+            <p className="postDesc">{description}</p>
         </div>
 
 

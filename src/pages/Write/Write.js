@@ -1,19 +1,53 @@
-import React from 'react';
-import './Write.css'
+import React, { useState, useContext } from 'react';
+import './Write.css';
+import { ProfileContext, UserContext } from '../../App';
+
+
 const Write = () => {
+
+    const [imageUrl, setImageUrl] = useState(null);
+    const [newsData, setNewsData] = useState({})
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [user, setUser] = useContext(ProfileContext);
+
+    const handleImage = (e) => {
+        setImageUrl(e.target.files[0]);
+    }
+
+    const handlePost = (e) => {
+        const newsInfo = { ...newsData };
+        newsInfo[e.target.name] = e.target.value;
+        setNewsData(newsInfo);
+        
+    }
+
+    const handleSubmit = (e) => {
+        console.log(loggedInUser);
+        const newsDetails = {
+            title : newsData.title,
+            email: user.email,
+            name: user.name,
+            description: newsData.description,
+            date: new Date().toLocaleDateString(),
+            img: imageUrl
+        }
+        console.log(newsDetails);
+        e.preventDefault();
+    }
+
     return (
         <div className="write">
-            <img className="writeImg" src="https://images.pexels.com/photos/1167355/pexels-photo-1167355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" />
-            <form className="writeForm">
+            
+            <form onSubmit={handleSubmit} className="writeForm">
                 <div className="writeFormGroup">
                     <label htmlFor="fileInput">
                         <i className="writeIcon fas fa-plus"></i>
                     </label>
-                    <input type="file" id="fileInput" style={{ display: "none" }} />
-                    <input type="text" placeholder="Title" className="writeInput" autoFocus={true} />
+                    <input onChange={handleImage} type="file" id="fileInput" style={{ display: "none" }} />
+                    <input onBlur={handlePost} name="title" type="text" placeholder="Title" className="writeInput" autoFocus={true} />
                 </div>
                 <div className="writeFormGroup">
-                    <textarea placeholder="Tell your story...." type="text" className="writeInput writeText">
+                    <textarea onBlur={handlePost} name="description" placeholder="Tell your story...." type="text" className="writeInput writeText">
                     </textarea>
                 </div>
                 <button className="writeSubmit"> Publish

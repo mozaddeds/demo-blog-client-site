@@ -1,6 +1,11 @@
-import React from 'react';
-import './Settings.css'
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../../App';
+import './Settings.css';
+
+
 const Settings = () => {
+
+
     return (
         <div className="settings">
             <div className="settingsWrapper">

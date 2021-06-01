@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import './Topbar.css'
+import './Topbar.css';
+import { UserContext } from '../../App';
 
 const Topbar = () => {
-    const user = false;
+
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
     return (
         <div className="top">
             <div className="topLeft">website name</div>
@@ -15,29 +18,25 @@ const Topbar = () => {
                     <li className="topListItem"><Link className="link" to="/">About</Link></li>
                     <li className="topListItem"><Link className="link" to="/">Contact</Link></li>
                     <li className="topListItem"><Link className="link" to="/write">Write</Link></li>
-                    <li className="topListItem">
-                        {user && "Logout"}
-                    </li>
                 </ul>
 
             </div>
             <div className="topRight">
-                {
-                    user ? (
-
-                        <img className="topImg" src="https://avatars.githubusercontent.com/u/76786635?s=96&v=4" alt="" />
-                    ) : (
-                        <ul className="topList">
-                            <li className="topListItem">
-                                <Link className="link" to="/login"> Login</Link>
-                            </li>
-                            <li className="topListItem">
-                                <Link className="link" to="/register"> Register</Link>
-                            </li>
-                        </ul>
-                    )
-
-                }
+                <ul className="topList">
+                    {loggedInUser? <div>
+                        <li className="topListItem">
+                            <Link className="link" to="/login"> Log Out</Link>
+                        </li>
+                    </div> :
+                    <div>
+                        <li className="topListItem">
+                            <Link className="link" to="/login"> Login</Link>
+                        </li>
+                        <li className="topListItem">
+                            <Link className="link" to="/register"> Register</Link>
+                        </li>
+                    </div>}
+                </ul>
             </div>
         </div>
     );
