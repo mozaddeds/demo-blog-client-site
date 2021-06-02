@@ -6,7 +6,6 @@ import './Single.css';
 const Single = () => {
 
     const {id} = useParams();
-    console.log(id);
 
     return (
         <div className="single">

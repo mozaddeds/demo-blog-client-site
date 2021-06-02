@@ -7,7 +7,7 @@ const News = (props) => {
 
     let history = useHistory();
 
-    const { id, title, email, name, description, date, img } = props.news;
+    const { _id, title, email, name, description, date, img } = props.news;
     const openNews = (newsId) => {
         const url = `/news/hvfhe${newsId}`;
         history.push(url);
@@ -15,15 +15,11 @@ const News = (props) => {
 
     return (
 
-        <div onClick = {() => openNews(id)} className="post">
+        <div onClick = {() => openNews(_id)} className="post">
             <img className="postImg" src={img} alt=""
             />
 
             <div className="postInfo">
-                <div className="postCats">
-                    <span className="postCat">Music</span>
-                    <span className="postCat">Life</span>
-                </div>
                 <span className="postTitle">{title}
                 </span>
                 <hr />

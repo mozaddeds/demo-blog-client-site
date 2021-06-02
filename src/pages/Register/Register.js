@@ -15,7 +15,6 @@ const Register = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
 
     const handleGoogleSignIn = () => {
-        console.log(`firebase login`)
         firebase.auth()
             .signInWithPopup(provider)
             .then((result) => {

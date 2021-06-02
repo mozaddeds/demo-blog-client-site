@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import News from '../News/News';
 import './AllNews.css'
-import fakeData from '../News/fakeData.json';
+
 
 
 const AllNews = () => {
 
-    
+    const [news, setNews] = useState([]);
+
+    useEffect(() => {
+        fetch('https://boiling-bayou-21827.herokuapp.com/news')
+            .then(res => res.json())
+            .then(data => setNews(data))
+    }, [])
 
     return (
         <div>
             <h1 className="news">All News</h1>
             <div className="allNews">
                 {
-                    fakeData.map(news => <News 
+                    news.map(news => <News
                         news={news}
-                        keys={news.id}
-                        ></News>)
+                        keys={news._id}
+                    ></News>)
                 }
             </div>
         </div>

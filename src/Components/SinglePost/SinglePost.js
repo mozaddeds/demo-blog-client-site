@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './SinglePost.css';
-import fakeData from '../News/fakeData.json';
 
 
 const SinglePost = (props) => {
 
-    const newsId = props.newsId;
+    const [allNews, setAllNews] = useState([]);
+
+    useEffect(() => {
+        fetch('https://boiling-bayou-21827.herokuapp.com/news')
+            .then(res => res.json())
+            .then(data => setAllNews(data))
+    }, [])
+
+    const newsNo = props.newsId;
     let news;
 
-    if (newsId) {
-        news = fakeData.filter(newsItem => newsItem.id === newsId)
-        console.log(news[0]);
+    if (newsNo) {
+        news = allNews.filter(newsItem => newsItem._id === newsNo)
     }
 
 

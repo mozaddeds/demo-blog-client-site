@@ -1,9 +1,13 @@
 import React, { useState, useContext } from 'react';
 import './Write.css';
 import { ProfileContext, UserContext } from '../../App';
+import axios from 'axios';
+import { useHistory } from 'react-router';
 
 
 const Write = () => {
+
+    let history = useHistory();
 
     const [imageUrl, setImageUrl] = useState(null);
     const [newsData, setNewsData] = useState({})
@@ -11,33 +15,53 @@ const Write = () => {
     const [user, setUser] = useContext(ProfileContext);
 
     const handleImage = (e) => {
-        setImageUrl(e.target.files[0]);
+        const imgData = new FormData();
+        imgData.set('key', '27d5f91841e9b02579f76312ffa2dfc4');
+        imgData.append('image', e.target.files[0])
+
+        axios.post('https://api.imgbb.com/1/upload', imgData)
+            .then(function (response) {
+                setImageUrl(response.data.data.display_url);
+            })
     }
 
     const handlePost = (e) => {
         const newsInfo = { ...newsData };
         newsInfo[e.target.name] = e.target.value;
         setNewsData(newsInfo);
-        
+
     }
 
     const handleSubmit = (e) => {
-        console.log(loggedInUser);
+
         const newsDetails = {
-            title : newsData.title,
+            title: newsData.title,
             email: user.email,
             name: user.name,
             description: newsData.description,
             date: new Date().toLocaleDateString(),
             img: imageUrl
         }
-        console.log(newsDetails);
+
+
+        const url = 'https://boiling-bayou-21827.herokuapp.com/addNews';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newsDetails)
+        })
+
         e.preventDefault();
+        e.target.reset();
+        alert("Your news has been sent");
+        history.push("/");
     }
 
     return (
         <div className="write">
-            
+
             <form onSubmit={handleSubmit} className="writeForm">
                 <div className="writeFormGroup">
                     <label htmlFor="fileInput">
